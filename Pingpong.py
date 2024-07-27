@@ -37,7 +37,7 @@ glatzel = pygame.transform.scale(glatzel, (50, 150))
 
 
 
-def steuerung(yposition_one, yposition_two, boddy_one, boddy_two):
+def steuerung(yposition_one, yposition_two):
     keys = pygame.key.get_pressed()
     if boddy_one.colliderect(line_top):  #Wenn boddy one or two mit der oberen oder unteren linie kollidiert dann wird die position zurückgesetzt
         yposition_one = 0
@@ -66,7 +66,7 @@ def steuerung(yposition_one, yposition_two, boddy_one, boddy_two):
 
     return yposition_one, yposition_two #werden aktualisiert zurückgeben
 
-def gravity_ball(score_one, score_two, boddy_one, boddy_two):
+def gravity_ball(score_one, score_two):
     global ball_position_x, ball_position_y, ball_speed_x, ball_speed_y, ball_radius
     ball_position_x += ball_speed_x
     ball_position_y += ball_speed_y
@@ -105,7 +105,7 @@ def gravity_ball(score_one, score_two, boddy_one, boddy_two):
 
 
 
-def draw_score(score_one, score_two):
+def draw_score():
     text_one = schriftart.render(f"Tore:{score_one}", True, (255, 0, 0))
     screen.blit(text_one, (640, 10))
 
@@ -148,11 +148,11 @@ while run:
     ball = pygame.draw.circle(screen, (weiss), (ball_position_x, ball_position_y), ball_radius, 0, )
     screen.blit(ball_image, (ball_position_x - 43, ball_position_y - 35))
 
-    yposition_one, yposition_two = steuerung(yposition_one, yposition_two, boddy_one, boddy_two)  # yposition_one und yposition_two werden der Funktion übergeben, damit sie aktualiesiert werden
+    yposition_one, yposition_two = steuerung(yposition_one, yposition_two)  # yposition_one und yposition_two werden der Funktion übergeben, damit sie aktualiesiert werden
 
 
-    score_one, score_two = gravity_ball(score_one, score_two, boddy_one, boddy_two) #score_one und score_two werden der Funktion übergeben, damit sie aktualiesiert werden
-    draw_score(score_two, score_one)
+    score_one, score_two = gravity_ball(score_one, score_two) #score_one und score_two werden der Funktion übergeben, damit sie aktualiesiert werden
+    draw_score()
 
 
 
